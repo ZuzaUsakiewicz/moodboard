@@ -14,14 +14,9 @@ const NavbarMenu = () => {
   }
 
   return (
-    <Navbar
-      isCompact
-      variant="floating"
-      css={{ pt: "$8", px: "$8" }}
-      isBordered
-    >
+    <Navbar isCompact variant="floating" isBordered>
       <Navbar.Brand as={Link} href="/">
-        <Text h2 size={30} weight="bold">
+        <Text h4 size={20} weight="bold" css={{ margin: "0 auto" }}>
           M😁😎Dboard
         </Text>
       </Navbar.Brand>
