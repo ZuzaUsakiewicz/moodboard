@@ -4,6 +4,7 @@ import type { NextPage } from "next";
 import { Text, Textarea, Grid, Button, Spacer } from "@nextui-org/react";
 import { withPageAuth } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
+import { getUserName } from "@/helpers/getUserName";
 
 const CreateMood: NextPage = () => {
   const supabaseClient = useSupabaseClient();
@@ -68,7 +69,7 @@ const CreateMood: NextPage = () => {
         />
       </Grid>
       <Grid xs={12}>
-        <Text>{user?.email}&apos;s Mood</Text>
+        <Text>{getUserName(user?.email)}&apos;s Mood</Text>
       </Grid>
       <Button onPress={createMood}>Create Mood</Button>
     </Grid.Container>
