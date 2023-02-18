@@ -52,7 +52,11 @@ const Mood: NextPage = () => {
       <Text size="$md">{moodboard.mood}</Text>
       {user && moodboard.user_id ? (
         <>
-          <Button size="xs" color="primary">
+          <Button
+            size="xs"
+            color="primary"
+            onPress={() => router.push("/editMood?id=" + id)}
+          >
             Edit{" "}
           </Button>
           <Button size="xs" color="error" onPress={() => deleteMood()}>
