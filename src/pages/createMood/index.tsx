@@ -1,10 +1,10 @@
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
-import type { NextPage } from "next";
-import { Text, Textarea, Grid, Button, Spacer } from "@nextui-org/react";
-import { withPageAuth } from "@supabase/auth-helpers-nextjs";
+import type { NextPage, GetServerSidePropsContext } from "next";
+import { Text, Textarea, Grid, Button } from "@nextui-org/react";
 import { useState } from "react";
 import { getUserName } from "@/helpers/getUserName";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 const CreateMood: NextPage = () => {
   const supabaseClient = useSupabaseClient();
@@ -78,4 +78,24 @@ const CreateMood: NextPage = () => {
 
 export default CreateMood;
 
-export const getServerSideProps = withPageAuth({ redirectTo: "/login" });
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const supabase = createServerSupabaseClient(ctx);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      initialSession: session,
+      user: session.user,
+    },
+  };
+};
