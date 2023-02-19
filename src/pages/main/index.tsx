@@ -1,5 +1,4 @@
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { Text } from "@nextui-org/react";
@@ -7,8 +6,6 @@ import MoodCard from "@/components/MoodCard";
 
 const MainPage: NextPage = () => {
   const supabaseClient = useSupabaseClient();
-  const user = useUser();
-  const router = useRouter();
   const [moods, setMoods] = useState<string[]>([]);
 
   useEffect(() => {
