@@ -1,7 +1,8 @@
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Navbar, Button, Text, Spacer } from "@nextui-org/react";
+import { Navbar, Button, Text, Badge } from "@nextui-org/react";
+import { getUserName } from "@/helpers/getUserName";
 
 const NavbarMenu = () => {
   const supabaseClient = useSupabaseClient();
@@ -22,7 +23,7 @@ const NavbarMenu = () => {
       </Navbar.Brand>
       <Navbar.Content hideIn="xs" variant="underline" activeColor="secondary">
         <Navbar.Link href="/main" color="secondary">
-          Main moods
+          Daily Moods
         </Navbar.Link>
         <Navbar.Link href="/createMood" color="error">
           Create Mood
@@ -40,10 +41,24 @@ const NavbarMenu = () => {
         ) : (
           <>
             <Navbar.Item>
-              <Text>Hey, {user?.email}</Text>
+              <Badge
+                content=""
+                color="success"
+                placement="top-right"
+                shape="circle"
+                variant="dot"
+                size="md"
+              >
+                <Text hideIn="xs">Hey, {getUserName(user?.email)}</Text>
+              </Badge>
             </Navbar.Item>
             <Navbar.Item>
-              <Button auto flat onPress={() => signOutUser()}>
+              <Button
+                color="gradient"
+                auto
+                size="sm"
+                onPress={() => signOutUser()}
+              >
                 Sign Out
               </Button>
             </Navbar.Item>
