@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Text } from "@nextui-org/react";
+import { Spacer, Text } from "@nextui-org/react";
 import MoodCard from "@/components/MoodCard";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useState, useEffect } from "react";
@@ -40,6 +40,7 @@ export default function Home() {
       </Head>
       <Text h1>Share your mood with everyone!</Text>
       <Text color="success">Newest Moods:</Text>
+      <Spacer y={3} />
       {moods.map((mood, index) => (
         <MoodCard key={index} mood={mood} />
       ))}

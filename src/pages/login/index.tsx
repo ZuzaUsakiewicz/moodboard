@@ -2,6 +2,7 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import type { NextPage } from "next";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
+import { Container, Row } from "@nextui-org/react";
 
 const Login: NextPage = () => {
   const supabaseClient = useSupabaseClient();
@@ -13,7 +14,29 @@ const Login: NextPage = () => {
   }
 
   return (
-    <Auth appearance={{ theme: ThemeSupa }} supabaseClient={supabaseClient} />
+    <Container>
+      <Row justify="center" align="center">
+        <Auth
+          appearance={{
+            theme: ThemeSupa,
+            variables: {
+              default: {
+                colors: {
+                  brand: "blue",
+                  brandAccent: "darkblue",
+                },
+                radii: {
+                  borderRadiusButton: "8px",
+                  buttonBorderRadius: "8px",
+                  inputBorderRadius: "8px",
+                },
+              },
+            },
+          }}
+          supabaseClient={supabaseClient}
+        />
+      </Row>
+    </Container>
   );
 };
 
